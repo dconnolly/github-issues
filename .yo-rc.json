@@ -1,0 +1,22 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "GithubIssues",
+    "coffee": false,
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "compassBootstrap": true,
+    "includeRequireJS": false
+  },
+  "generator-assemble": {
+    "projectName": "",
+    "projectDesc": "The best project ever.",
+    "githubUser": "assemble",
+    "installPlugin": true,
+    "author": {
+      "name": "Deirdre Connolly",
+      "login": "assemble",
+      "email": "durumcrustulum@gmail.com"
+    }
+  }
+}
