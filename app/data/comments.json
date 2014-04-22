@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://api.github.com/repos/tastejs/todomvc/issues/comments/40972266",
+    "html_url": "https://github.com/tastejs/todomvc/issues/896#issuecomment-40972266",
+    "issue_url": "https://api.github.com/repos/tastejs/todomvc/issues/896",
+    "id": 40972266,
+    "user": {
+      "login": "ColinEberhardt",
+      "id": 1098110,
+      "avatar_url": "https://avatars.githubusercontent.com/u/1098110?",
+      "gravatar_id": "73bba00b41ff1c9ecc3ee29487bace7d",
+      "url": "https://api.github.com/users/ColinEberhardt",
+      "html_url": "https://github.com/ColinEberhardt",
+      "followers_url": "https://api.github.com/users/ColinEberhardt/followers",
+      "following_url": "https://api.github.com/users/ColinEberhardt/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ColinEberhardt/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ColinEberhardt/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ColinEberhardt/subscriptions",
+      "organizations_url": "https://api.github.com/users/ColinEberhardt/orgs",
+      "repos_url": "https://api.github.com/users/ColinEberhardt/repos",
+      "events_url": "https://api.github.com/users/ColinEberhardt/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ColinEberhardt/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2014-04-21T20:17:26Z",
+    "updated_at": "2014-04-21T20:17:26Z",
+    "body": "Very well spotted - yes this is a bug."
+  }
+]
