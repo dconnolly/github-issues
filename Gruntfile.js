@@ -64,7 +64,17 @@ module.exports = function (grunt) {
             options: {
                 port: grunt.option('port') || SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: 'localhost',
+                // middleware: function(connect, options, middlewares) {
+                //     // inject a custom middleware into the array of default middlewares
+                //     middlewares.push(function(req, res, next) {
+                //         if (req.url !== '/hello/world') return next();
+
+                //         res.end('Hello, world from port #' + options.port + '!');
+                //     });
+
+                //     return middlewares;
+                // }
             },
             livereload: {
                 options: {

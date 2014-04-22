@@ -8,8 +8,12 @@ GithubIssues.Models = GithubIssues.Models || {};
     GithubIssues.Models.Issue = Backbone.Model.extend({
 
         url: function () {
-            //return 'https://api.github.com/repos/' + GithubIssues.owner + '/' + GithubIssues.repo + '/issues' + '/' + this.id;
-            return 'http://localhost:9000/data/issue.json'
+            // return 'http://localhost:9000/data/issue.json';
+            return GithubIssues.github.buildUrl('repos',
+                                                GithubIssues.owner,
+                                                GithubIssues.repo,
+                                                'issues',
+                                                this.get('number'));
         }
 
     });

@@ -104,3 +104,31 @@ body {
     color: #999;
     font-size: 13px;
 }
+
+.issue-header {
+    margin-bottom: 1em;
+
+    .issue-header-meta {
+        color: #999;
+
+        .issue-header-status {
+            margin-right: .25em;
+        }
+    }
+}
+
+.issue-header-number {
+    font-weight: normal;
+    color: #777;
+}
+
+.issue-comment {
+    .panel-heading {
+        color: #777;
+        font-size: 13px;
+
+        .issue-comment-user-avatar {
+            margin-right: 0.25em;
+        }
+    }
+}

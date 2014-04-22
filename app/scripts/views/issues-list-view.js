@@ -1,4 +1,4 @@
-/*global GithubIssues, Backbone, JST*/
+/*global GithubIssues, Backbone */
 
 GithubIssues.Views = GithubIssues.Views || {};
 
@@ -16,9 +16,13 @@ GithubIssues.Views = GithubIssues.Views || {};
         events: {},
 
         initialize: function () {
+            console.log(this.collection);
             this.listenTo(this.collection, 'change', this.addAll);
             this.listenTo(this.collection, 'reset', this.addAll);
-            this.collection.fetch({reset: true});
+            this.collection.fetch({reset: true, data: {
+                page: this.collection.page,
+                per_page: this.collection.perPage
+            }});
         },
 
         render: function () {

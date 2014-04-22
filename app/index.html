@@ -71,18 +71,44 @@
         </script>
 
         <script type="text/template" id="issue-template">
-         <div class="panel panel-default">
+
+         <div id="issue-header" class="issue-header issue" >
+           <div class="issue-header-show">
+             <a class="issue-header-back pull-left hide" href="https://github.com/tastejs/todomvc/issues" data-hotkey="u" title="Back to Issue list">
+               <span class="glyphicon glyphicon-arrow-left"></span>
+             </a>
+             <h3 class="issue-header-title">
+               <span class="issue-header-title"><%= issue.title %></span>
+               <span class="issue-header-number">#<%= issue.number %></span>
+             </h3>
+           </div>
+
+           <span class="issue-header-meta">
+             <button class="btn btn-sm <% if (issue.state == 'open') { %>btn-success<% } else {%>btn-danger<% } %> issue-header-status">
+               <span class="glyphicon glyphicon-exclamation-sign"></span> <%= issue.state %>
+             </button>
+             <a href="<%= issue.user.html_url %>" class="author"><%= issue.user.login %></a>
+             opened this issue <local-time datetime="2014-04-12T02:32:55-07:00" from="now" title-format="%Y-%m-%d %H:%M:%S %z" title="2014-04-12 05:32:55 -0400"><%= issue.created_at%></local-time>
+            <% if (issue.comments > 1) {%> · <%= issue.comments %> comments<% } else if (issue.comments == 1) { %> · 1 comment<% } %>
+           </span>
+         </div>
+         <% comments.forEach(function (comment) { %>
+         <div class="issue-comment panel panel-default">
            <div class="panel-heading">
-            <%= title %>
+             <a href="<%= comment.user.html_url%>">
+               <img alt="<%= comment.user.login %>" class="issue-comment-user-avatar" height=20 width=20 src="<%= comment.user.avatar_url %>?s=20">
+             </a>
+             <a href="<%= comment.user.html_url%>">
+               <strong><%= comment.user.login %></strong>
+             </a>
+             commented
+             <local-time datetime="<%= comment.created_at %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ><%= comment.created_at %></local-time>
            </div>
            <div class="panel-body">
-             <p><%= body %></p>
+             <p><%= comment.body %></p>
            </div>
-             <!-- List group -->
-           <ul class="activity list-group">
-               <li class="list-group-item">Cras justo odio</li>
-           </ul>
          </div>
+         <% }) %>
         </script>
 
         <!-- build:js scripts/vendor.js -->
@@ -108,6 +134,7 @@
 
         <!-- build:js({.tmp,app}) scripts/main.js -->
         <script src="scripts/main.js"></script>
+        <script src="scripts/lib/github.js"></script>
         <script src="scripts/routes/router.js"></script>
         <script src="scripts/models/issue.js"></script>
         <script src="scripts/collections/issues.js"></script>
@@ -118,6 +145,9 @@
 
         <script src="scripts/views/header.js"></script>
         <script src="scripts/views/issue-view.js"></script>
+        <script src="scripts/models/comment.js"></script>
+        <script src="scripts/models/event.js"></script>
+        <script src="scripts/collections/comments.js"></script>
         <!-- endbuild -->
 </body>
 </html>

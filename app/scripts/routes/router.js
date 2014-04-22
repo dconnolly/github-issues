@@ -9,14 +9,17 @@ GithubIssues.Routers = GithubIssues.Routers || {};
 
         routes: {
             ':owner/:repo/issues': 'loadIssuesView',
-            ':owner/:repo/issues/:id': 'loadIssueView'
+            ':owner/:repo/issues/page/:page': 'loadIssuesView',
+            ':owner/:repo/issues/:number': 'loadIssueView'
         },
 
         loadIssuesView: function(/* arguments */) {
             this.prepPageView.apply(this, arguments);
             this.issueView && this.issueView.remove();
+            var issues = new GithubIssues.Collections.Issues();
+            issues.page = arguments[2] || 1;
             this.listView = new GithubIssues.Views.IssuesListView({
-                collection: new GithubIssues.Collections.Issues()
+                collection: issues
             });
         },
 
@@ -25,7 +28,7 @@ GithubIssues.Routers = GithubIssues.Routers || {};
             this.listView && this.listView.remove();
             this.issueView = new GithubIssues.Views.IssueView({
                 model: new GithubIssues.Models.Issue({
-                    id: arguments[2]
+                    number: arguments[2]
                 })
             });
         },

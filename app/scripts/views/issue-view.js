@@ -1,4 +1,4 @@
-/*global GithubIssues, Backbone, JST*/
+/*global GithubIssues, Backbone */
 
 GithubIssues.Views = GithubIssues.Views || {};
 
@@ -14,13 +14,30 @@ GithubIssues.Views = GithubIssues.Views || {};
         events: {},
 
         initialize: function () {
+            console.log(this.model);
+            this.comments = new GithubIssues.Collections.Comments([], {
+                issueNumber: this.model.get('number')
+            });
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'reset', this.render);
-            this.model.fetch({ reset: true });
+            this.listenTo(this.comments, 'change', this.render);
+            this.listenTo(this.comments, 'reset', this.render);
+            var that = this;
+            $.when(this.model.fetch(), this.comments.fetch())
+                .then(function() {
+                    that.render();
+                });
         },
 
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            console.log(this.comments);
+            var issue = this.model.toJSON();
+            var comments = this.comments.toJSON();
+            comments.unshift(issue);
+            this.$el.html(this.template({
+                issue: issue,
+                comments: comments
+            }));
             return this;
         }
 
