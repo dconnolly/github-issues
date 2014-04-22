@@ -11,7 +11,6 @@ window.GithubIssues = {
         this.github = new this.Lib.GitHub();
         this.router = new this.Routers.IssuesRouter();
         Backbone.history.start({pushState: true, root: '/'});
-        this.router.navigate('rails/rails/issues', {trigger: true});
     }
 };
 

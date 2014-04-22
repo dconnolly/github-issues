@@ -81,13 +81,20 @@ body {
         padding-right: 0;
     }
     /* Space out the masthead */
-    .header {
+    .header, footer {
         margin-bottom: 30px;
     }
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+.issue-list-empty-msg {
+    @include center-block();
+    width: 10em;
+    color: #999;
+    margin-bottom: 30px;
 }
 
 .issue-list-item-number {

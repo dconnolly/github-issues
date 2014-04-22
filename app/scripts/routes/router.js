@@ -10,7 +10,13 @@ GithubIssues.Routers = GithubIssues.Routers || {};
         routes: {
             ':owner/:repo/issues': 'loadIssuesView',
             ':owner/:repo/issues/page/:page': 'loadIssuesView',
-            ':owner/:repo/issues/:number': 'loadIssueView'
+            ':owner/:repo/issues/:number': 'loadIssueView',
+            '': 'defaultView',
+        },
+
+        defaultView: function() {
+            GithubIssues.router.navigate('rails/rails/issues',
+                                         {trigger: true});
         },
 
         loadIssuesView: function(/* arguments */) {
