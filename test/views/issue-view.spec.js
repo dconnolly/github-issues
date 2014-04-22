@@ -1,10 +1,10 @@
 /*global beforeEach, describe, it, assert, expect  */
 'use strict';
 
-describe('Issue View', function () {
+describe('IssueView View', function () {
 
     beforeEach(function () {
-        this.IssueView = new GithubIssues.Views.Issue();
+        this.IssueViewView = new GithubIssues.Views.IssueView();
     });
 
 });

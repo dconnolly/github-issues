@@ -7,12 +7,15 @@ GithubIssues.Views = GithubIssues.Views || {};
 
     GithubIssues.Views.IssuesListView = Backbone.View.extend({
 
-        el: '#github-issues-app',
+        el: '#issue-list',
+
+        tagName: 'div',
+
+        id: 'issue-list',
 
         events: {},
 
         initialize: function () {
-            this.$list = this.$('#issue-list');
             this.listenTo(this.collection, 'change', this.addAll);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.collection.fetch({reset: true});
@@ -25,12 +28,11 @@ GithubIssues.Views = GithubIssues.Views || {};
 
         addOne: function(issue) {
             var view = new GithubIssues.Views.IssueItemView({model: issue});
-            this.$list.append(view.render().el);
+            this.$el.append(view.render().el);
         },
 
         addAll: function() {
-            console.log(this.collection);
-            this.$list.html('');
+            this.$el.html('');
             this.collection.each(this.addOne, this);
         },
 

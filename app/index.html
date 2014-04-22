@@ -21,37 +21,67 @@
         <![endif]-->
 
 
-        <div class="container">
+        <div id="github-issues-app" class="container">
             <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">Github Issues - rails/rails</h3>
             </div>
 
-            <div id='github-issues-app'>
-                <div id="issue-list">
-                </div>
+
+            <div id="issue-list">
+            </div>
+
+            <div id="issue">
             </div>
 
         </div>
 
-        <script type="text/template" id="issue-template">
+        <script type="text/template" id="header-template">
+           <ul class="nav nav-pills pull-right">
+               <li class="active"><a href="#">Home</a></li>
+               <li><a href="#">About</a></li>
+               <li><a href="#">Contact</a></li>
+           </ul>
+           <h3 class="text-muted">GitHub Issues - <%= GithubIssues.owner %>/<%= GithubIssues.repo %></h3>
+        </script>
+
+        <script type="text/template" id="issue-item-template">
          <div class="panel-body">
-            <span class="issue-list-item-number badge">#<%= number %></span>
-            <h4><a href="<%= html_url %>"><%= title %></a></h4>
+            <span class="issue-list-item-number">#<%= number %></span>
+            <h4 class="issue-list-item-name">
+                <a href="<%= url %>" class="issue-list-item-link"><%= title %></a>
+            </h4>
             <p class="issue-list-item-summary">
                 <%= truncateBody() %>
             </p>
-            <a href="<%= user.html_url%>">
-                <img alt="<%= user.login %>" class="timeline-comment-avatar js-avatar" height="48" src="<%= user.avatar_url%>?s=140" width="48">
-            </a>
+
             <span>
-            Opened by <a href="<%= user.html_url %>"><%= user.login %></a>
+            <div class="issue-list-item-meta">
+            Opened by <a href="<%= user.html_url %>">
+            <a href="<%= user.html_url%>">
+                <img alt="<%= user.login %>" class="timeline-comment-avatar" height=16 width=16 src="<%= user.avatar_url %>?s=16">
+                <strong><%= user.login %></strong>
+            </a>
             <local-time datetime="<%= created_at %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ></local-time>
+            </div>
+            <% labels.forEach(function (label) { %>
+            <span class="label label-default" style="background-color: #<%= label.color %>;"><%= label.name %></span>
+            <% }) %>
+
             </span>
+         </div>
+        </script>
+
+        <script type="text/template" id="issue-template">
+         <div class="panel panel-default">
+           <div class="panel-heading">
+            <%= title %>
+           </div>
+           <div class="panel-body">
+             <p><%= body %></p>
+           </div>
+             <!-- List group -->
+           <ul class="activity list-group">
+               <li class="list-group-item">Cras justo odio</li>
+           </ul>
          </div>
         </script>
 
@@ -78,12 +108,16 @@
 
         <!-- build:js({.tmp,app}) scripts/main.js -->
         <script src="scripts/main.js"></script>
+        <script src="scripts/routes/router.js"></script>
         <script src="scripts/models/issue.js"></script>
         <script src="scripts/collections/issues.js"></script>
         <script src="scripts/models/user.js"></script>
         <script src="scripts/models/repository.js"></script>
         <script src="scripts/views/issue-item-view.js"></script>
         <script src="scripts/views/issues-list-view.js"></script>
+
+        <script src="scripts/views/header.js"></script>
+        <script src="scripts/views/issue-view.js"></script>
         <!-- endbuild -->
 </body>
 </html>

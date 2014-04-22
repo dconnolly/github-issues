@@ -11,9 +11,14 @@ GithubIssues.Views = GithubIssues.Views || {};
 
         className: 'issue-list-item panel panel-default',
 
-        template: _.template($('#issue-template').html()),
+        template: _.template($('#issue-item-template').html()),
 
-        events: {},
+        events: {
+            'click .issue-list-item-link': function (ev) {
+                ev.preventDefault();
+                GithubIssues.router.navigate(this.url(), {trigger: true});
+            }
+        },
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -24,9 +29,16 @@ GithubIssues.Views = GithubIssues.Views || {};
             return shortBody.substr(0, shortBody.lastIndexOf(' ')) + ' ...';
         },
 
+        url: function () {
+            return [, GithubIssues.owner, GithubIssues.repo, 'issues', this.model.id].join('/');
+        },
+
         render: function () {
             var data = this.model.toJSON();
-            _.extend(data, {truncateBody: this.truncateBody});
+            _.extend(data, {
+                truncateBody: this.truncateBody,
+                url: this.url()
+            });
             this.$el.html(this.template(data));
             return this;
         }

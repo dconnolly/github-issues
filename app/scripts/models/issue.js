@@ -7,11 +7,9 @@ GithubIssues.Models = GithubIssues.Models || {};
 
     GithubIssues.Models.Issue = Backbone.Model.extend({
 
-        validate: function(attrs, options) {
-        },
-
-        parse: function(response, options)  {
-            return response;
+        url: function () {
+            //return 'https://api.github.com/repos/' + GithubIssues.owner + '/' + GithubIssues.repo + '/issues' + '/' + this.id;
+            return 'http://localhost:9000/data/issue.json'
         }
 
     });

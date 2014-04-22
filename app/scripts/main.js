@@ -2,18 +2,19 @@
 
 
 window.GithubIssues = {
-    repo: 'rails/rails',
     Models: {},
     Collections: {},
     Views: {},
     Routers: {},
     init: function () {
         'use strict';
-        new this.Views.IssuesListView({
-            collection: new this.Collections.Issues()
-        });
+        this.router = new this.Routers.IssuesRouter();
+        Backbone.history.start({pushState: true, root: '/'});
+        this.router.navigate('rails/rails/issues', {trigger: true});
     }
 };
+
+_.extend(GithubIssues, Backbone.Events);
 
 $(document).ready(function () {
     'use strict';

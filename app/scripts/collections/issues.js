@@ -8,8 +8,10 @@ GithubIssues.Collections = GithubIssues.Collections || {};
     GithubIssues.Collections.Issues = Backbone.Collection.extend({
 
         model: GithubIssues.Models.Issue,
-        //url: 'https://api.github.com/repos/' + GithubIssues.repo + '/issues'
-        url: 'http://localhost:9000/data/issues.json'
+        url: function () {
+            //return 'https://api.github.com/repos/' + GithubIssues.owner + '/' + GithubIssues.repo + '/issues';
+            return 'http://localhost:9000/data/issues.json'
+        }
 
     });
 
