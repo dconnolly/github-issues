@@ -116,16 +116,21 @@
            <div class="issue-labels-sidebar">
              <strong><h6>Labels</h6></strong>
 
+             <% if (issue.labels.length) {%>
              <% issue.labels.forEach(function (label) { %>
                  <a href="<%= label.url %>" class="label-link">
                    <span class="label label-default" style="background-color: #<%= label.color %>;"><%= label.name %></span>
                  </a>
              <% }) %>
+             <% } else {%>
+                <h6>None yet.</h6>
+             <% }%>
            </div>
            </div>
         </script>
 
         <script type="text/template" id="activity-template">
+          <% if (body.length ) {%>
           <div class="issue-comment panel panel-default">
            <div class="panel-heading">
              <a href="<%= user.html_url%>">
@@ -141,6 +146,7 @@
              <p><%= annotatedBody() %></p>
            </div>
          </div>
+         <% } %>
         </script>
 
         <!-- build:js scripts/vendor.js -->
