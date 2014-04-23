@@ -7,19 +7,18 @@ GithubIssues.Views = GithubIssues.Views || {};
 
     GithubIssues.Views.IssuesListView = Backbone.View.extend({
 
-        el: '#issues',
+        template: _.template($('#issue-list-template').html()),
 
-        // tagName: 'div',
-
-        // id: 'issue-list',
+        el: '',
 
         events: {
-            'click .pager .next': 'nextPage'
+            'click .pager .next': 'nextPage',
+            'click .pager .previous': 'previousPage'
         },
 
         initialize: function () {
-            this.$list = this.$('#issue-list');
-            this.$pager = this.$('.pager');
+            this.views = [];
+            this.render();
             this.listenTo(this.collection, 'change', this.addAll);
             this.listenTo(this.collection, 'reset', this.addAll);
             this.collection.fetch({reset: true, data: {
@@ -29,27 +28,31 @@ GithubIssues.Views = GithubIssues.Views || {};
         },
 
         render: function () {
-            this.$list.html(this.template());
+            this.$el.html(this.template());
+            this.$list = this.$('#issue-list');
+            this.$pager = this.$('.pager');
             return this;
         },
 
         addOne: function(issue) {
-            var view = new GithubIssues.Views.IssueItemView({model: issue});
+            var view = new GithubIssues.Views.IssueItemView({
+                model: issue
+            });
+            this.views.push(view);
             this.$list.append(view.render().el);
         },
 
         addAll: function() {
             this.$list.html('');
             this.collection.each(this.addOne, this);
-            if (this.collection.page == 1) {
+            if (this.collection.page < 2) {
                 this.$pager.find('.previous').addClass('disabled');
             }
-            this.$pager.show();
-
         },
 
         buildPageURL: function(pageNumber) {
-            return [, GithubIssues.owner, GithubIssues.repo, 'issues', 'page', pageNumber].join('/');
+            var repo = GithubIssues.repo;
+            return [, repo.get('owner'), repo.get('repo'), 'issues', 'page', pageNumber].join('/');
         },
 
         nextPage: function(ev) {
@@ -61,11 +64,20 @@ GithubIssues.Views = GithubIssues.Views || {};
 
         previousPage: function(ev) {
             ev.preventDefault();
-            var nextPageURL = this.buildPageURL(Number(this.collection.page)-1);
-            GithubIssues.router.navigate(nextPageURL,
+            if (this.collection.page == 1) {
+                return;
+            }
+            var previousPageURL = this.buildPageURL(Number(this.collection.page)-1);
+            GithubIssues.router.navigate(previousPageURL,
                                          {trigger: true});
-        }
+        },
 
+        remove: function() {
+            _.each(this.views, function(view) {
+                view.remove();
+            });
+            Backbone.View.prototype.remove.apply(this);
+        }
 
     });
 

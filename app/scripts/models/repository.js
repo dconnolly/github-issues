@@ -21,6 +21,7 @@ GithubIssues.Models = GithubIssues.Models || {};
         parse: function(response, options)  {
             return response;
         }
+
     });
 
 })();

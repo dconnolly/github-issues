@@ -9,7 +9,9 @@ window.GithubIssues = {
     init: function () {
         'use strict';
         this.github = new this.Lib.GitHub();
+        this.repo = new this.Models.Repository();
         this.router = new this.Routers.IssuesRouter();
+        this.appView = new GithubIssues.Views.AppView();
         Backbone.history.start({pushState: true, root: '/'});
     }
 };

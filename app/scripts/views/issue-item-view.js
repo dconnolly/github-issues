@@ -30,7 +30,8 @@ GithubIssues.Views = GithubIssues.Views || {};
         },
 
         url: function () {
-            return [, GithubIssues.owner, GithubIssues.repo, 'issues', this.model.get('number')].join('/');
+            var repo = GithubIssues.repo;
+            return [, repo.get('owner'), repo.get('repo'), 'issues', this.model.get('number')].join('/');
         },
 
         render: function () {

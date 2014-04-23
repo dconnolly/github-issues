@@ -20,31 +20,30 @@ GithubIssues.Routers = GithubIssues.Routers || {};
         },
 
         loadIssuesView: function(/* arguments */) {
-            this.prepPageView.apply(this, arguments);
-            this.issueView && this.issueView.remove();
-            var issues = new GithubIssues.Collections.Issues();
-            issues.page = arguments[2] || 1;
-            this.listView = new GithubIssues.Views.IssuesListView({
-                collection: issues
+            this.updateRepo.apply(this, arguments);
+            GithubIssues.issues = new GithubIssues.Collections.Issues();
+            GithubIssues.issues.page = arguments[2] || 1;
+            var listView = new GithubIssues.Views.IssuesListView({
+                collection: GithubIssues.issues
             });
+            GithubIssues.appView.showView(listView);
         },
 
         loadIssueView: function(/* arguments */) {
-            this.prepPageView.apply(this, arguments);
-            this.listView && this.listView.remove();
-            this.issueView = new GithubIssues.Views.IssueView({
+            this.updateRepo.apply(this, arguments);
+            GithubIssues.issues = new GithubIssues.Collections.Issues();
+            var issueView = new GithubIssues.Views.IssueView({
                 model: new GithubIssues.Models.Issue({
                     number: arguments[2]
                 })
             });
+            GithubIssues.appView.showView(issueView);
+
         },
 
-        prepPageView: function(/* arguments */) {
-            GithubIssues.owner = arguments[0];
-            GithubIssues.repo = arguments[1];
-            this.headerView = new GithubIssues.Views.HeaderView({
-                model: GithubIssues
-            });
+        updateRepo: function(/* arguments */) {
+            GithubIssues.repo.set('owner', arguments[0]);
+            GithubIssues.repo.set('repo', arguments[1]);
         }
     });
 

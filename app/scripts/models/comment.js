@@ -8,8 +8,15 @@ GithubIssues.Models = GithubIssues.Models || {};
     GithubIssues.Models.Comment = Backbone.Model.extend({
 
         url: function(issueId) {
-            return GithubIssues.github.buildUrl(this.owner, this.repo, 'issues', this.id);
+            return GithubIssues.github.buildUrl(this.owner,
+                                                this.repo,
+                                                'issues',
+                                                this.id);
         },
+
+        getAnnotatedBody: function() {
+            return this.body;
+        }
 
 
 

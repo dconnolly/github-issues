@@ -9,14 +9,14 @@ GithubIssues.Collections = GithubIssues.Collections || {};
 
         model: GithubIssues.Models.Comment,
         url: function() {
-            console.log(this);
-//            return "http://localhost:9000/data/comments.json";
-            return GithubIssues.github.buildUrl('repos',
-                                                GithubIssues.owner,
-                                                GithubIssues.repo,
-                                                'issues',
-                                                this.issueNumber,
-                                                'comments');
+            return "http://localhost:9000/data/comments.json";
+            // var repo = GithubIssues.repo;
+            // return GithubIssues.github.buildUrl('repos',
+            //                                     repo.get('owner'),
+            //                                     repo.get('repo'),
+            //                                     'issues',
+            //                                     this.issueNumber,
+            //                                     'comments');
         }
 
     });

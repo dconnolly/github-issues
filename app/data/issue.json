@@ -31,6 +31,21 @@
       "url": "https://api.github.com/repos/tastejs/todomvc/labels/discussion",
       "name": "discussion",
       "color": "444444"
+    },
+      {
+      "url": "https://api.github.com/repos/tastejs/todomvc/labels/discussion",
+      "name": "discussion",
+      "color": "444444"
+    },
+      {
+      "url": "https://api.github.com/repos/tastejs/todomvc/labels/discussion",
+      "name": "discussion",
+      "color": "444444"
+    },
+      {
+      "url": "https://api.github.com/repos/tastejs/todomvc/labels/discussion",
+      "name": "discussion",
+      "color": "444444"
     }
   ],
   "state": "open",
