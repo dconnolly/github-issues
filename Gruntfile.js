@@ -1,10 +1,27 @@
 'use strict';
+
+var path = require('path');
+var request = require('request');
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
-var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
+
+var pushStateHook = function (url) {
+    return function (req, res, next) {
+        var ext = path.extname(req.url);
+        if ((ext == "" || ext === ".html") && req.url != "/") {
+            req.pipe(request(url)).pipe(res);
+        } else {
+            next();
+        }
+    };
+};
+
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -64,25 +81,17 @@ module.exports = function (grunt) {
             options: {
                 port: grunt.option('port') || SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost',
-                // middleware: function(connect, options, middlewares) {
-                //     // inject a custom middleware into the array of default middlewares
-                //     middlewares.push(function(req, res, next) {
-                //         if (req.url !== '/hello/world') return next();
-
-                //         res.end('Hello, world from port #' + options.port + '!');
-                //     });
-
-                //     return middlewares;
-                // }
+                hostname: 'localhost'
             },
             livereload: {
                 options: {
                     middleware: function (connect) {
                         return [
+                            pushStateHook('http://localhost:9000'),
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
+                            mountFolder(connect, yeomanConfig.app),
+
                         ];
                     }
                 }
@@ -95,7 +104,8 @@ module.exports = function (grunt) {
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'test'),
-                            mountFolder(connect, yeomanConfig.app)
+                            mountFolder(connect, yeomanConfig.app),
+
                         ];
                     }
                 }

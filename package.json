@@ -24,12 +24,13 @@
     "connect-livereload": "~0.3.2",
     "time-grunt": "~0.2.8",
     "jshint-stylish": "~0.1.5",
-    "connect-modrewrite": "~0.5.11"
+    "connect-modrewrite": "~0.5.11",
+    "request": "~2.34.0"
   },
   "engines": {
     "node": ">=0.10.0"
   },
-    "scripts": {
-        "preinstall": "bower install"
-    }
+  "scripts": {
+    "preinstall": "bower install"
+  }
 }
