@@ -68,7 +68,7 @@
                 <img alt="<%= user.login %>" class="timeline-comment-avatar" height=16 width=16 src="<%= user.avatar_url %>?s=16">
                 <strong><%= user.login %></strong>
             </a>
-            <local-time datetime="<%= created_at %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ></local-time>
+            <local-time datetime="<%= moment(created_at).fromNow() %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ></local-time>
             </div>
             <% labels.forEach(function (label) { %>
             <a href="<%= label.url %>" class="label-link">
@@ -100,7 +100,7 @@
 
              <span>
                  <a href="<%= issue.user.html_url %>" class="author"><%= issue.user.login %></a>
-                  opened this issue <local-time datetime="2014-04-12T02:32:55-07:00" from="now" title-format="%Y-%m-%d %H:%M:%S %z" title="2014-04-12 05:32:55 -0400"><%= issue.created_at%></local-time>
+                  opened this issue <local-time datetime="2014-04-12T02:32:55-07:00" from="now" title-format="%Y-%m-%d %H:%M:%S %z" title="2014-04-12 05:32:55 -0400"><%= moment(issue.created_at).fromNow() %></local-time>
                  <% if (issue.comments > 1) {%> · <%= issue.comments %> comments<% } else if (issue.comments == 1) { %> · 1 comment<% } %>
              </span>
 
@@ -140,7 +140,7 @@
                <strong><%= user.login %></strong>
              </a>
              commented
-             <local-time datetime="<%= created_at %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ><%= created_at %></local-time>
+             <local-time datetime="<%= created_at %>" from="now" title-format="%Y-%m-%d %H:%M:%S %z" ><%= moment(created_at).fromNow() %></local-time>
            </div>
            <div class="panel-body">
              <p><%= annotatedBody() %></p>
@@ -153,6 +153,7 @@
         <script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/underscore/underscore.js"></script>
         <script src="/bower_components/backbone/backbone.js"></script>
+        <script src="/bower_components/momentjs/moment.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/plugins.js -->
